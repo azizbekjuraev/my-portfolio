@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from './Icon';
+import { Button } from './Button';
 import { Project, PROJECTS } from '../constants';
 
 interface ProjectDetailProps {
@@ -43,13 +44,16 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
         aria-labelledby="detail-title"
         aria-modal="true"
       >
-        {p && (
+        {p && (() => {
+          const hasShot = !!p.screenshots && p.screenshots.length > 0;
+          const linkLabel = p.urlLabel ?? 'Visit live';
+          return (
           <div className="ov-in">
             <div className="ov-top">
               <span className="mono-label">Case · {p.year}</span>
-              <button 
-                className="ov-close" 
-                onClick={onClose} 
+              <button
+                className="ov-close"
+                onClick={onClose}
                 aria-label="Close"
                 ref={closeBtnRef}
               >
@@ -58,21 +62,24 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
             </div>
             <h2 id="detail-title" className="h1" style={{ fontSize: '52px' }}>{p.name}</h2>
             <p className="body" style={{ marginTop: '8px' }}>{p.company}</p>
-            
-            <div className="ov-hero" style={{ padding: 0, background: 'var(--ink)' }}>
-              {p.screenshots && p.screenshots.length > 0 ? (
-                <img 
-                  src={p.screenshots[0]} 
-                  alt={`${p.name} screenshot`} 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover',
-                    filter: 'grayscale(1)',
-                    transition: 'filter 0.4s ease'
+
+            <div
+              className="ov-hero"
+              style={
+                hasShot
+                  ? { padding: 0, background: 'transparent', aspectRatio: 'auto', height: 'auto' }
+                  : { padding: 0, background: 'var(--ink)' }
+              }
+            >
+              {hasShot ? (
+                <img
+                  src={p.screenshots![0]}
+                  alt={`${p.name} screenshot`}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block'
                   }}
-                  onMouseOver={(e) => e.currentTarget.style.filter = 'grayscale(0)'}
-                  onMouseOut={(e) => e.currentTarget.style.filter = 'grayscale(1)'}
                 />
               ) : (
                 <span className="mk">{p.mk}</span>
@@ -84,6 +91,20 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
               <div><div className="k">Stack</div><div className="v">{p.stack}</div></div>
               <div><div className="k">Type</div><div className="v">{p.type}</div></div>
             </div>
+            {p.url && (
+              <div style={{ marginBottom: '28px' }}>
+                <Button
+                  variant="primary"
+                  href={p.url}
+                  icon="arrow-up-right"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${linkLabel} (opens in new tab)`}
+                >
+                  {linkLabel}
+                </Button>
+              </div>
+            )}
             <div className="ov-body">
               <h3 className="h4">What I did</h3>
               <ul>{p.points.map((pt, i) => <li key={i}>{pt}</li>)}</ul>
@@ -92,7 +113,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
               </div>
             </div>
           </div>
-        )}
+          );
+        })()}
       </aside>
     </>
   );

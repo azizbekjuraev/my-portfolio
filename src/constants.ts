@@ -1,3 +1,8 @@
+import flonitShot from '../assets/flonit.png';
+import sofilmShot from '../assets/sofilm.png';
+import octoposShot from '../assets/octopos.png';
+import startupbaseShot from '../assets/startupbase.png';
+
 export interface Project {
   id: string;
   mk: string;
@@ -12,6 +17,8 @@ export interface Project {
   region: string;
   points: string[];
   screenshots?: string[];
+  url?: string;
+  urlLabel?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -23,15 +30,17 @@ export const PROJECTS: Project[] = [
     tags: ['React', 'TypeScript', 'AWS Lightsail', 'GitHub Actions'],
     stack: 'React · TypeScript · AWS', type: 'Regulatory dashboard', region: 'Seoul, KR',
     points: [
-      'Built and maintain Flonit end to end — the emission-data dashboard reported to regulators every day.',
+      'Built and maintain Flonit end to end — the KEFA emission-data dashboard inside Nexinsight, reported to regulators every day.',
       'Researched and integrated open-source tools to empower non-developers: Puck Editor for in-browser content editing without engineering involvement, and pdfme for page-specific PDF generation from the UI.',
       'Own AWS infrastructure end to end — deploying frontend builds via AWS Lightsail and authoring GitHub Actions CI/CD pipelines across three projects, cutting time to production.',
       'Dip into the API layer when reshaping a backend response is faster than client-side gymnastics — a full-stack mindset that ships product faster.',
     ],
-    screenshots: ['https://placehold.co/1200x800/0b0b0b/f7f7f4?text=Flonit+Dashboard']
+    screenshots: [flonitShot],
+    url: 'https://nexinsight.kr',
+    urlLabel: 'Visit Nexinsight'
   },
   {
-    id: 'sofilm', mk: 'SO', name: 'sofilm.uz', year: '2024',
+    id: 'sofilm', mk: 'SO', name: 'Sofilm', year: '2024',
     company: 'The Ad Tech', role: 'Frontend Engineer',
     desc: 'An LMS connecting students and teachers, built with Next.js end to end — student and admin panels, rich-text authoring and real-time chat.',
     tags: ['Next.js', 'WebSockets', 'Lexical', 'Unit testing'],
@@ -43,7 +52,8 @@ export const PROJECTS: Project[] = [
       'Shipped a real-time live chat feature on WebSockets.',
       'Maintained documentation, supported users responsively, and collaborated cross-functionally on new features and quality improvements.',
     ],
-    screenshots: ['https://placehold.co/1200x800/0b0b0b/f7f7f4?text=sofilm.uz+LMS']
+    screenshots: [sofilmShot],
+    url: 'https://sofilm.uz'
   },
   {
     id: 'octopos', mk: 'OC', name: 'Octopos', year: '2023',
@@ -57,10 +67,11 @@ export const PROJECTS: Project[] = [
       "Offline-first by design — POS and Kitchen apps keep operating when the internet drops; orders queue locally and sync seamlessly when connectivity returns, because a restaurant can't stop serving guests when the WiFi blinks.",
       'Frontend in React with TanStack Query against a Go backend.',
     ],
-    screenshots: ['https://placehold.co/1200x800/0b0b0b/f7f7f4?text=Octopos+POS']
+    screenshots: [octoposShot],
+    url: 'https://octopos.uz'
   },
   {
-    id: 'startupbase', mk: 'SB', name: 'startupbase.uz', year: '2023',
+    id: 'startupbase', mk: 'SB', name: 'Startup Base', year: '2023',
     company: 'Scientech Solutions', role: 'Intern Frontend Engineer',
     desc: "Uzbekistan's startup investment and networking platform, built with React.js and Redux Toolkit — a dashboard serving both end users and admins.",
     tags: ['React.js', 'Redux Toolkit', 'SEO', 'Unit testing'],
@@ -70,6 +81,7 @@ export const PROJECTS: Project[] = [
       'Designed a user-friendly dashboard serving both end users and admins; closed meaningful design debt to lift interface consistency.',
       'Implemented unit tests for code reliability and optimized HTML semantics for SEO.',
     ],
-    screenshots: ['https://placehold.co/1200x800/0b0b0b/f7f7f4?text=startupbase.uz']
+    screenshots: [startupbaseShot],
+    url: 'https://startupbase.uz/en'
   },
 ];

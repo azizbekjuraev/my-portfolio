@@ -11,7 +11,7 @@ import {
   type LucideIcon 
 } from 'lucide-react';
 
-const icons: Record<string, LucideIcon> = {
+const icons = {
   'arrow-up-right': ArrowUpRight,
   'x': X,
   'github': Github,
@@ -21,16 +21,17 @@ const icons: Record<string, LucideIcon> = {
   'chevron-right': ChevronRight,
   'check': CheckCircle2,
   'terminal': Terminal,
-};
+} satisfies Record<string, LucideIcon>;
+
+export type IconName = keyof typeof icons;
 
 interface IconProps {
-  name: string;
+  name: IconName;
   size?: number;
   className?: string;
 }
 
 export function Icon({ name, size = 20, className }: IconProps) {
   const Component = icons[name];
-  if (!Component) return null;
   return <Component size={size} className={className} strokeWidth={1.75} />;
 }
