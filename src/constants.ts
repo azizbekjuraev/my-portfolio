@@ -1,7 +1,7 @@
-import flonitShot from '../assets/flonit.png';
-import sofilmShot from '../assets/sofilm.png';
-import octoposShot from '../assets/octopos.png';
-import startupbaseShot from '../assets/startupbase.png';
+import flonitShot from '../assets/flonit.webp';
+import sofilmShot from '../assets/sofilm.webp';
+import octoposShot from '../assets/octopos.webp';
+import startupbaseShot from '../assets/startupbase.webp';
 
 export interface Project {
   id: string;

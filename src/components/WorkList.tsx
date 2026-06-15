@@ -10,12 +10,12 @@ interface ProjectDetailProps {
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
   const open = !!project;
-  const [shown, setShown] = useState<Project | null>(project);
+  const [lastShown, setLastShown] = useState<Project | null>(project);
   const closeBtnRef = React.useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (project) {
-      setShown(project);
+      setLastShown(project);
       setTimeout(() => closeBtnRef.current?.focus(), 100);
     }
   }, [project]);
@@ -28,7 +28,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onClose }) => {
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  const p = shown;
+  const p = project ?? lastShown;
 
   return (
     <>
@@ -126,6 +126,10 @@ export const WorkList: React.FC = () => {
   useEffect(() => {
     document.body.style.overflow = active ? 'hidden' : '';
   }, [active]);
+
+  useEffect(() => {
+    PROJECTS.forEach(p => p.screenshots?.forEach(src => { new Image().src = src; }));
+  }, []);
 
   return (
     <section id="work" className="sec">
